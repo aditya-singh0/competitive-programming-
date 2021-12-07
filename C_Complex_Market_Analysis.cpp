@@ -276,42 +276,46 @@ int phin(int n)
 /*--------------------------------------------------------------------------------------------------------------------------*/
 // Sieve
 int N = 1e6 + 7;
-vector<int> pr; // store all primes till N
-vector<int> fcnt; // factor count of each number
+vector<int> pr;     // store all primes till N
+vector<int> fcnt;   // factor count of each number
 vector<bool> prime; // true for prime numbers
-vector<int> spf; // smallest prime factor
-void sieve() {
-    prime.assign(N, true);
-    spf.resize(N);
-    fcnt.resize(N);
- 
-    prime[1] = false;
-    for (int p = 2; p < N; p++) {
-        if (prime[p]) {
-            spf[p] = p;
-            for (int i = p + p; i <= N; i += p) {
-                prime[i] = false; // not prime
-               //  if (spf[i] == 0) {
-               //      spf[i] = p; // first divisor of i
-               //  }
-            }
-        }
-    }
- 
-//     for (int p = 2; p <= N; p++) { // storing primes
-//         if (prime[p]) {
-//             pr.push_back(p);
-//         }
-//     }
+vector<int> spf;    // smallest prime factor
+void sieve()
+{
+   prime.assign(N, true);
+   spf.resize(N);
+   fcnt.resize(N);
 
-//    for (int i = 2; i < N; ++i) { // counting factors of i
-//        fcnt[i] = fcnt[i / spf[i]] + 1;
-//    }
+   prime[1] = false;
+   for (int p = 2; p < N; p++)
+   {
+      if (prime[p])
+      {
+         spf[p] = p;
+         for (int i = p + p; i <= N; i += p)
+         {
+            prime[i] = false; // not prime
+            //  if (spf[i] == 0) {
+            //      spf[i] = p; // first divisor of i
+            //  }
+         }
+      }
+   }
 
-// //factors till a point
-//    for (int i = 1; i < N; ++i) {
-//        fcnt[i] += fcnt[i - 1];
-//    }
+   //     for (int p = 2; p <= N; p++) { // storing primes
+   //         if (prime[p]) {
+   //             pr.push_back(p);
+   //         }
+   //     }
+
+   //    for (int i = 2; i < N; ++i) { // counting factors of i
+   //        fcnt[i] = fcnt[i / spf[i]] + 1;
+   //    }
+
+   // //factors till a point
+   //    for (int i = 1; i < N; ++i) {
+   //        fcnt[i] += fcnt[i - 1];
+   //    }
 }
 
 void solve()
@@ -321,31 +325,29 @@ void solve()
    vector<int> a(n);
    f(i, 0, n) cin >> a[i];
 
-   vector<int> str;
-
-   for (int i = 0; i < n; ++i)
-   {
-      if (a[i] == 1)
-      {
-         str.push_back(i);
-      }
-   }
-
    vector<int> pre(n);
-   for (int i = 0; i < sz(str); ++i)
+
+   f(i, 0, n)
    {
-      pre[str[i]] = (str[i] - e >= 0 ? pre[str[i] - e] + 1 : 1);
+      if (a[i] != 1)
+         continue;
+
+      pre[i] = (i - e >= 0 ? pre[i - e] + 1 : 1);
    }
 
-   reverse(all(str));
    vector<int> suf(n);
-   for (int i = 0; i < sz(str); ++i)
+
+   fr(i, n - 1, 0)
    {
-      suf[str[i]] = (str[i] + e < n ? suf[str[i] + e] + 1 : 1);
+      if (a[i] != 1)
+         continue;
+      
+         suf[i] = (i + e < n ? suf[i + e] + 1 : 1);
+      
    }
 
    int ans = 0;
-  
+
    for (int i = 0; i < n; ++i)
    {
       if (prime[a[i]])
@@ -376,7 +378,7 @@ signed main()
    fastio();
    auto start1 = high_resolution_clock::now();
    int t = 1;
-   
+
    cin >> t;
    sieve();
    while (t--)
