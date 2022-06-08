@@ -1,0 +1,19 @@
+
+
+//1st
+int tunak=0; 
+            int tarara=0;
+        char muthi='k';
+        //use
+                    tunak++;
+        tunak=tarara+tunak;
+    tarara++;
+                    tunak=0;
+    tarara=-157;
+               
+               muthi='o';
+
+ 
+
+        
+ 

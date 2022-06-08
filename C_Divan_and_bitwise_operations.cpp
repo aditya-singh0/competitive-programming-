@@ -97,7 +97,8 @@ int phin(int n) {int number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0
 /*--------------------------------------------------------------------------------------------------------------------------*/
 
 
-
+//https://www.youtube.com/watch?v=TqfgWGbZK8s
+//https://www.geeksforgeeks.org/sum-xor-possible-subsets/
 void solve() {
         int n, m;
     cin >> n >> m;
@@ -113,13 +114,14 @@ void solve() {
     int ans = 0;
     for (int i = 0; i < 32; ++i) {
         int mask = (1ll << i);
-        int cnt = 0;
+        bool atleastOneSet=false;
         for (int j = 0; j < m; ++j) {
             if (str[j] & mask) {
-                cnt ++;
+                atleastOneSet=true;
+                break;
             }
         }
-        if (cnt) {
+        if (atleastOneSet) {
             ans = mod_add(ans, mod_mul(mask, expo(2, n - 1)));
             // ans = modadd(ans, modmul(mask, modmul(modpow(2, cnt - 1), modpow(2, n - cnt))));
         }

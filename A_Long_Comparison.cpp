@@ -1,13 +1,6 @@
-
-
 #include <bits/stdc++.h>
-// #include<ext/pb_ds/assoc_container.hpp>
-// #include<ext/pb_ds/tree_policy.hpp>
-
 using namespace std;
 using namespace chrono;
-// using namespace __gnu_pbds;
-
 #define fastio()                     \
    ios_base::sync_with_stdio(false); \
    cin.tie(NULL);                    \
@@ -68,20 +61,15 @@ using maxh = priority_queue<T>;
 const int dx[8] = {0, 1, -1, 0, -1, -1, 1, 1};
 const int dy[8] = {1, 0, 0, -1, 1, -1, -1, 1};
 const char sp = ' ';
-#ifdef DEBUG
+
 #define debug(x...)     \
    cerr << #x << "= ["; \
    _print(x);           \
    cerr << "]" << ln;
-#else
-#define debug(x...)
-#endif
 
 typedef unsigned long long ull;
 typedef long double lld;
-// typedef tree<pair<int, int>, null_type, less<pair<int, int>>, rb_tree_tag, tree_order_statistics_node_update > pbds; // find_by_order, order_of_key
 
-// void _print(int t) {cerr << t;}
 void _print(int t) { cerr << t; }
 void _print(string t) { cerr << t; }
 void _print(char t) { cerr << t; }
@@ -171,148 +159,30 @@ void _print(T t, V... v)
       cerr << ", ";
    _print(v...);
 }
-// void _print(pbds v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
-
-/*---------------------------------------------------------------------------------------------------------------------------*/
-int expo(int a, int b)
-{
-   int res = 1;
-   while (b > 0)
-   {
-      if (b & 1)
-         res = (res * a) % MOD;
-      a = (a * a) % MOD;
-      b = b >> 1;
-   }
-   return res;
-}
-void extendgcd(int a, int b, int *v)
-{
-   if (b == 0)
-   {
-      v[0] = 1;
-      v[1] = 0;
-      v[2] = a;
-      return;
-   }
-   extendgcd(b, a % b, v);
-   int x = v[1];
-   v[1] = v[0] - v[1] * (a / b);
-   v[0] = x;
-   return;
-} // pass an arry of size1 3
-int mminv(int a, int b)
-{
-   int arr[3];
-   extendgcd(a, b, arr);
-   return arr[0];
-} // for non prime b
-int mminvprime(int a, int b) { return expo(a, b - 2); }
-int combination(int n, int r, int m, int *fact, int *ifact)
-{
-   int val1 = fact[n];
-   int val2 = ifact[n - r];
-   int val3 = ifact[r];
-   return (((val1 * val2) % m) * val3) % m;
-}
-int mod_add(int a, int b)
-{
-   a = a % MOD;
-   b = b % MOD;
-   return (((a + b) % MOD) + MOD) % MOD;
-}
-int mod_mul(int a, int b)
-{
-   a = a % MOD;
-   b = b % MOD;
-   return (((a * b) % MOD) + MOD) % MOD;
-}
-int mod_sub(int a, int b)
-{
-   a = a % MOD;
-   b = b % MOD;
-   return (((a - b) % MOD) + MOD) % MOD;
-}
-int mod_div(int a, int b)
-{
-   a = a % MOD;
-   b = b % MOD;
-   return (mod_mul(a, mminvprime(b, MOD)) + MOD) % MOD;
-} // only for prime m
-int phin(int n)
-{
-   int number = n;
-   if (n % 2 == 0)
-   {
-      number /= 2;
-      while (n % 2 == 0)
-         n /= 2;
-   }
-   for (int i = 3; i <= sqrt(n); i += 2)
-   {
-      if (n % i == 0)
-      {
-         while (n % i == 0)
-            n /= i;
-         number = (number / i * (i - 1));
-      }
-   }
-   if (n > 1)
-      number = (number / n * (n - 1));
-   return number;
-} // O(sqrt(N))
-/*--------------------------------------------------------------------------------------------------------------------------*/
-
+// copy math template here
 void solve()
 {
    // see if you need number of test case or not
-   int x1, p1, x2, p2;
-   cin >> x1 >> p1 >> x2 >> p2;
-   // from line 272 to 278 is the comparison between very long values
-   int mn = min(p1, p2);
-   p1 -= mn;
-   p2 -= mn;
-   if (p1 >= 11)
-      cout << ">" ;
-   else if (p2 >= 11)
-      cout << "<" ;
-   else
-   {
-      while (p1--)
-         x1 *= 10;
-
-      while (p2--)
-         x2 *= 10;
-
-      if (x1 > x2)
-         cout << ">";
-      else if (x1 == x2)
-         cout << "=";
-      else
-         cout << "<";
-   }
+   cout << "ok";
 }
 
 signed main()
 {
-#ifdef aditya
-   freopen("Error.txt", "w", stderr);
+#ifndef ONLINE_JUDGE
+   // uncomment for seeing input and ouput in file
+   // freopen("error.txt", "w", stderr);
+   // freopen("input.txt", "r", stdin);
+   // freopen("output.txt", "w", stdout);
 #endif
    fastio();
-   auto start1 = high_resolution_clock::now();
-   int t = 1;
 
+   int t = 1;
    cin >> t;
-   // pre compution is called here (for eg seive)
+   // precomputation cannot be dependend on array size(n) or range etc
+   // precomput();
    while (t--)
    {
-
       solve();
       cout << ln;
    }
-   auto stop1 = high_resolution_clock::now();
-   auto duration = duration_cast<microseconds>(stop1 - start1);
-#ifdef aditya
-   cerr << "Time: " << duration.count() / 1000 << endl;
-#endif
 }

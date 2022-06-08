@@ -104,9 +104,9 @@ void solve() {
     vi cnt(32,0);
  
     for(int i:a){
-        f(j,0,32) if(((1<<j)&i)) cnt[j]++;
+        f(j,0,32) if(((1ll<<j)&i)) cnt[j]++;
     }
-    //debug(cnt);
+    debug(cnt);
  
     vi ans;
     

@@ -1,76 +1,41 @@
-#include <bits/stdc++.h>
-using namespace std;
+package introduction;
+import java.io.*;
+import java.math.*;
+import java.util.*;
 
-void dfs(int i, int j, vector<vector<int>> &vis)
+class Main
 {
-   vis[i][j] = 1;
-   if (i - 1 >= 0 && vis[i - 1][j] == 0)
-      dfs(i - 1, j, vis);
-   if (j - 1 >= 0 && vis[i][j - 1] == 0)
-      dfs(i, j - 1, vis);
-   if (i + 1 < vis.size() && vis[i + 1][j] == 0)
-      dfs(i + 1, j, vis);
-   if (j + 1 < vis[0].size() && vis[i][j + 1] == 0)
-      dfs(i, j + 1, vis);
-}
 
-int main()
-{
-   int t;
-   cin >> t;
-   while (t--)
+public
+   static void main(String args[])
    {
-      vector<string> arr(16);
-      for (int i = 0; i < 16; i++)
+      Scanner sc = new Scanner(System.in);
+      int t = sc.nextInt();
+      while (t-- > 0)
       {
-         cin >> arr[i];
-      }
-      vector<vector<int>> vis(16, vector<int>(16, 0));
-      pair<int, int> start, end;
-      for (int i = 0; i < 16; i++)
-      {
-         for (int j = 0; j < 16; j++)
+         int n = sc.nextInt();
+         char arr[] = sc.next().toCharArray();
+         Stack<Long> st = new Stack<>();
+         int i = 0;
+         while (i < n)
          {
-            if (arr[i][j] == '2')
+            if (arr[i] == '*')
             {
-               start.first = i;
-               start.second = j;
+               long last = st.pop();
+               int next = arr[i + 1] - '0';
+               st.push(last * next);
+               i++;
             }
-            if (arr[i][j] == '3')
+            else if (arr[i] != '+')
             {
-               end.first = i;
-               end.second = j;
+               st.push((long)(arr[i] - '0'));
             }
-            if (arr[i][j] == '1')
-            {
-               vis[i][j] = 1;
-            }
+            i++;
          }
-      }
-      for (int i = 0; i < 1; i++)
-      {
-         for (int j = 0; j < 16; j++)
-         {
-            if (vis[i][j] == '0')
-            {
-               dfs(i, j, vis);
-               if (vis[start.first][start.second] && !vis[end.first][end.second])
-               {
-                  cout << '0' << endl;
-                  break;
-               }
-               if (!vis[start.first][start.second] && vis[end.first][end.second])
-               {
-                  cout << '0' << endl;
-                  break;
-               }
-               if (vis[start.first][start.second] && vis[end.first][end.second])
-               {
-                  cout << '1' << endl;
-                  break;
-               }
-            }
-         }
+         long ans = 0;
+         while (!st.isEmpty())
+            ans += st.pop();
+         System.out.println(ans);
       }
    }
 }
