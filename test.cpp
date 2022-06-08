@@ -159,8 +159,9 @@ void _print(T t, V... v)
       cerr << ", ";
    _print(v...);
 }
-//copy math template here
+// copy math template here
 
+void google(int t) { cout << "Case #" << t << ": "; }
 
 void solve()
 {
@@ -171,10 +172,10 @@ signed main()
 {
 #ifndef ONLINE_JUDGE
    // uncomment for seeing input and ouput in file
-   //freopen("error.txt", "w", stderr);
+   // freopen("error.txt", "w", stderr);
    // freopen("input.txt", "r", stdin);
    // freopen("output.txt", "w", stdout);
-   //  cerr<<"Finished"<<ln;
+   // cerr<<"Finished"<<ln;
 #endif
    fastio();
 
@@ -182,8 +183,11 @@ signed main()
    cin >> t;
    // precomputation cannot be dependend on array size(n) or range etc
    // precomput();
-   while (t--)
+   int c = 1;
+   while (c <= t)
    {
+
+      google(c++);
       solve();
       cout << ln;
    }
